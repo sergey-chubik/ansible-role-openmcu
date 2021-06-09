@@ -1,0 +1,14 @@
+---
+# defaults file for openmcu
+openmcu_package_version: openmcu-ru-4.1.8-1485.el7.x86_64.rpm
+openmcu_files: "{{ role_path }}/files"
+openmcu_templates: "{{ role_path }}/templates"
+
+# Copying custom openmcu.ini, screen layout settings and VKS rooms or leave by default (true)
+openmcu_copy_custom_settings: true
+openmcu_web_admin_user: admin
+openmcu_web_admin_password:
+openmcu_web_conf_user: guin
+openmcu_web_conf_password: guin
+openmcu_rtp_base_port: 7000
+openmcu_rtp_max_port: 7999

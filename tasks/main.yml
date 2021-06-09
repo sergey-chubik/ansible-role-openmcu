@@ -1,0 +1,58 @@
+---
+# tasks file for openmcu
+- name: openmcu | Install dependencies for OpenMCU
+  yum:
+    name:
+      - libstdc++
+      - freetype
+      - libjpeg-turbo
+    state: present
+
+- name: openmcu | Copying the package OpenMCU to /tmp directory
+  copy:
+    src: "{{ openmcu_files }}/{{ openmcu_package_version }}"
+    dest: /tmp/
+
+- name: openmcu | Install OpenMCU server
+  yum:
+    name: "/tmp/{{ openmcu_package_version }}"
+    state: present
+
+- name: openmcu | Copying custom files for OpenMCU
+  template:
+    src: "{{ item }}"
+    dest: /opt/openmcu-ru/config/
+    owner: mcu
+    group: mcu
+    mode: '0644'
+    backup: yes
+  with_fileglob:
+    - "{{ openmcu_templates }}/*.conf"
+  notify:
+    - restart service openmcu
+  when: openmcu_copy_custom_settings
+
+- name: openmcu | Edit custom settings OpenMCU
+  template:
+    src: "{{ openmcu_templates }}/openmcu.ini.j2"
+    dest: /opt/openmcu-ru/config/openmcu.ini
+    owner: mcu
+    group: mcu
+    mode: '0644'
+    backup: yes
+  notify:
+    - restart service openmcu
+  when: openmcu_copy_custom_settings
+
+- name: openmcu | Copying a task to cron to restart OpenMCU
+  copy:
+    src: "{{ openmcu_files }}/openmcu"
+    dest: /etc/cron.d/openmcu
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: openmcu | Settings mcu user in file limits.d
+  lineinfile:
+    path: /etc/security/limits.d/20-nproc.conf
+    line: 'mcu        soft    nproc     unlimited'

@@ -1,0 +1,7 @@
+---
+# handlers file for openmcu
+- name: restart service openmcu
+  service:
+    name: openmcu-ru
+    state: restarted
+    enabled: yes

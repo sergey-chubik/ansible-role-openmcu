@@ -1,0 +1,295 @@
+[SIP Audio]
+OPUS_48K2{sw}=True
+OPUS_48K{sw}=True
+SILK_B40_24K{sw}=True
+SILK_B40{sw}=True
+OPUS_16K{sw}=True
+Speex_32K{sw}=True
+Speex_16K{sw}=True
+G.722-64k{sw}=True
+OPUS_8K{sw}=True
+Speex_8K{sw}=True
+G.711-uLaw-64k{sw}=True
+G.711-ALaw-64k{sw}=True
+G.7231-6.3k[e]{sw}=True
+G.729A{sw}=True
+G.729{sw}=True
+G.726-40k{sw}=True
+G.726-32k{sw}=True
+G.726-24k{sw}=True
+G.726-16k{sw}=True
+iLBC-13k3{sw}=True
+iLBC-15k2{sw}=True
+G.722.1-24K{sw}=True
+G.722.1-32K{sw}=True
+G.722.1C-24K{sw}=True
+G.722.1C-32K{sw}=True
+G.722.1C-48K{sw}=True
+G.722.2{sw}=True
+
+[SIP Video]
+VP8{sw}=True
+H.264{sw}=True
+H.263p{sw}=True
+H.263{sw}=True
+MP4V-ES{sw}=True
+H.261{sw}=True
+
+[Managing Groups]
+
+[Export Parameters]
+RESTORE DEFAULTS=FALSE
+Enable export=TRUE
+Video frame width=1280
+Video frame height=1024
+Video frame rate=15
+Audio sample rate=16000
+Audio channels=1
+
+[Managing Users]
+{{ openmcu_web_admin_user }}={{ openmcu_web_admin_password }},administrator
+{{ openmcu_web_conf_user }}={{ openmcu_web_conf_password }},conference manager
+
+[Telnet Server]
+RESTORE DEFAULTS=FALSE
+Enable=FALSE
+Telnet Listener=*:1423
+Username=admin
+
+[RTSP Server *]
+RTP Input Timeout=60
+
+[Registrar Parameters]
+RESTORE DEFAULTS=FALSE
+Allow internal calls=TRUE
+SIP allow registration without authentication=TRUE
+SIP allow MCU calls without authentication=TRUE
+SIP allow internal calls without authentication=TRUE
+SIP registrar minimum expiration=60
+SIP registrar maximum expiration=600
+H.323 gatekeeper enable=TRUE
+H.323 allow registration without authentication=TRUE
+H.323 allow MCU calls without registration=TRUE
+H.323 allow internal calls without registration=TRUE
+H.323 allow duplicate aliases=TRUE
+H.323 gatekeeper minimum Time To Live=60
+H.323 gatekeeper maximum Time To Live=600
+
+[Video]
+RESTORE DEFAULTS=FALSE
+Enable video=TRUE
+Video frame rate=15
+Video scale filter=libyuv|kFilterBilinear
+
+[Conference *]
+Auto create when connecting=Disable
+Force split screen video=Enable
+Auto delete empty=Disable
+Auto record start=Disable
+Auto record stop=Disable
+Recall last template=Disable
+Template locks conference by default=Enable
+
+[Conference 200]
+Auto create when connecting=Disable
+Force split screen video=Enable
+Auto delete empty=Disable
+Auto record start=Disable
+Auto record stop=Disable
+Recall last template=Disable
+Template locks conference by default=Enable
+
+[Parameters]
+RESTORE DEFAULTS=FALSE
+Language=RU
+OpenMCU-ru Server Id=...
+Default protocol for outgoing calls=h323
+HTTP IP={{ ansible_default_ipv4.address }}
+HTTP Port=1420
+Enable HTTP secure=FALSE
+HTTP Certificate=/opt/openmcu-ru/ssl/http.pem
+RTP Base Port={{ openmcu_rtp_base_port }}
+RTP Max Port={{ openmcu_rtp_max_port }}
+Trace level=0
+Rotate trace files at startup=0
+Log Level=5
+Call log filename=/opt/openmcu-ru/log/mcu_log.txt
+Room control event buffer size=100
+Copy web log to call log=FALSE
+Default room=200
+Reject duplicate name=FALSE
+Allow loopback calls=FALSE
+Auto dial delay=X
+Video Recorder directory=/opt/openmcu-ru/records
+Video Recorder video codec=mpeg4
+Video Recorder resolution=1280x720
+Video Recorder frame rate=15
+Video Recorder video bitrate=0
+Video Recorder audio codec=ac3
+Video Recorder sound rate=16000
+Video Recorder sound channels=1
+
+[H323 Parameters]
+RESTORE DEFAULTS=FALSE
+H.323 Listener={{ ansible_default_ipv4.address }}:1720
+Disable Fast-Start=FALSE
+Disable H.245 Tunneling=FALSE
+Gatekeeper Mode=No gatekeeper
+Gatekeeper request retry interval=30
+Gatekeeper registration TTL(Time To Live)=600
+Gatekeeper Username=MCU
+
+[SIP Parameters]
+RESTORE DEFAULTS=FALSE
+SIP Listener={{ ansible_default_ipv4.address }}:5060,transport=udp
+
+[RTSP Parameters]
+RESTORE DEFAULTS=FALSE
+Enable=TRUE
+Listener={{ ansible_default_ipv4.address }}:1554
+
+[SIP Endpoint *]
+Room=002
+Ping interval=20
+SIP call processing=redirect
+RTP proto=RTP
+RTP Input Timeout=60
+Video cache=Enable
+Received VFU delay=Disable
+
+[RECEIVE_SOUND]
+G.711-ALaw-64k{sw}=True
+TABLEID=False
+SILK_B40{sw}=True
+SILK_B40_24K{sw}=True
+OPUS_48K2{sw}=True
+OPUS_48K{sw}=True
+OPUS_16K{sw}=True
+OPUS_8K{sw}=True
+G.711-uLaw-64k{sw}=True
+G.7231-6.3k[e]{sw}=True
+G.729A{sw}=True
+G.729{sw}=True
+Speex_32K{sw}=True
+Speex_16K{sw}=True
+Speex_8K{sw}=True
+G.726-40k{sw}=True
+G.726-32k{sw}=True
+G.726-24k{sw}=True
+G.726-16k{sw}=True
+iLBC-13k3{sw}=True
+iLBC-15k2{sw}=True
+G.722-64k{sw}=True
+G.722.1-24K{sw}=True
+G.722.1-32K{sw}=True
+G.722.1C-24K{sw}=True
+G.722.1C-32K{sw}=True
+G.722.1C-48K{sw}=True
+G.722.2{sw}=True
+
+[RECEIVE_VIDEO]
+H.264{sw}=True
+TABLEID=False
+VP8{sw}=True
+H.263p{sw}=True
+H.263{sw}=True
+H.261{sw}=True
+MP4V-ES{sw}=True
+
+[TRANSMIT_SOUND]
+G.711-ALaw-64k=True
+TABLEID=False
+OPUS_48K2{sw}=True
+OPUS_48K{sw}=True
+SILK_B40_24K{sw}=True
+SILK_B40{sw}=True
+OPUS_16K{sw}=True
+Speex_32K{sw}=True
+Speex_16K{sw}=True
+G.722-64k{sw}=True
+OPUS_8K{sw}=True
+Speex_8K{sw}=True
+G.711-uLaw-64k=True
+G.7231-6.3k[e]{sw}=True
+G.729A{sw}=True
+G.729{sw}=True
+G.726-40k{sw}=True
+G.726-32k{sw}=True
+G.726-24k{sw}=True
+G.726-16k{sw}=True
+iLBC-13k3{sw}=True
+iLBC-15k2{sw}=True
+G.722.1-24K{sw}=True
+G.722.1-32K{sw}=True
+G.722.1C-24K{sw}=True
+G.722.1C-32K{sw}=True
+G.722.1C-48K{sw}=True
+G.722.2{sw}=True
+
+[TRANSMIT_VIDEO]
+H.264{sw}=True
+TABLEID=False
+VP8{sw}=True
+H.263p{sw}=True
+H.263{sw}=True
+H.261{sw}=True
+MP4V-ES{sw}=True
+
+[H323 Endpoint *]
+Room=002
+Ping interval=20
+H.323 call processing=full
+RTP Input Timeout=60
+Video cache=Enable
+Received VFU delay=Disable
+
+[H323 Endpoint codian]
+Room=200
+Display name=ФСИН России2
+Ping interval=20
+Input Gain=0
+Output Gain=0
+Host=10.77.12.121
+Frame rate from MCU=15
+RTP Input Timeout=15
+Video cache=Enable
+Audio codec(receive)=G.711-ALaw-64k{sw}
+Audio codec(transmit)=G.711-ALaw-64k
+Video codec(receive)=H.264{sw}
+Video resolution(receive)=1280x720
+Video codec(transmit)=H.264{sw}
+Video resolution(transmit)=1280x1024
+
+[H323 Endpoint 4000]
+Room=200
+Display name=ФСИН России1
+Ping interval=20
+Input Gain=0
+Output Gain=0
+Host=10.77.12.121
+Frame rate from MCU=15
+RTP Input Timeout=15
+Video cache=Enable
+Audio codec(receive)=G.711-ALaw-64k{sw}
+Audio codec(transmit)=G.711-ALaw-64k
+Video codec(receive)=H.264{sw}
+Video resolution(receive)=1280x720
+Video codec(transmit)=H.264{sw}
+Video resolution(transmit)=1280x1024
+
+[H323 Endpoint 10.77.16.184]
+Room=200
+Display name=ФСИН России
+Ping interval=20
+Input Gain=0
+Output Gain=0
+Host=10.77.16.184
+Frame rate from MCU=15
+RTP Input Timeout=15
+Video cache=Enable
+Audio codec(receive)=G.711-ALaw-64k{sw}
+Audio codec(transmit)=G.711-ALaw-64k
+Video codec(receive)=H.264{sw}
+Video resolution(receive)=1280x720
+Video codec(transmit)=H.264{sw}
+Video resolution(transmit)=1280x1024
